@@ -21,7 +21,7 @@ public interface EmployeePortalRepository extends JpaRepository<Employee, String
 	/**
 	 * This method returns list of employees available
 	 * in the database order by First Name ascending
-	 * @return List<Employee>
+	 * @return List of employee objects
 	 */
 	public List<Employee> findByOrderByFirstNameAsc();
 	
