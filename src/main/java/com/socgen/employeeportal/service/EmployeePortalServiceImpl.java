@@ -43,7 +43,7 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 			return emp.getEmployeeId();
 		}
 		catch(Exception exception) {
-			throw new PortalServiceException(exception.getMessage(), exception.getCause());
+			throw new PortalServiceException("Exception will registering the employee", exception.getCause());
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 			return employees;
 		}
 		catch(Exception exception) {
-			throw new PortalServiceException(exception.getMessage(), exception.getCause());
+			throw new PortalServiceException("Exception while fetching the list of employees", exception.getCause());
 		}
 		
 	}
