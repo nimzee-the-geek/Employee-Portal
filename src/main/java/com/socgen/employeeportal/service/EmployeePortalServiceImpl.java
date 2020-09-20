@@ -4,6 +4,7 @@
 package com.socgen.employeeportal.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.socgen.employeeportal.dao.EmployeePortalRepository;
+import com.socgen.employeeportal.exception.PortalServiceException;
 import com.socgen.employeeportal.model.Employee;
 
 /**
@@ -33,10 +35,16 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 	@Override
 	public String registerEmployee(Employee employee) {
 		
-		Employee emp = employeeRepository.save(employee);
-		
-		LOGGER.info("Registered employee with employee id: {}", emp.getEmployeeId());
-		return emp.getEmployeeId();
+		try {
+			Employee emp = employeeRepository.save(employee);
+			
+			LOGGER.info("Registered employee with employee id: {}", emp.getEmployeeId());
+			
+			return emp.getEmployeeId();
+		}
+		catch(Exception exception) {
+			throw new PortalServiceException(exception.getMessage(), exception.getCause());
+		}
 	}
 	
 	/**
@@ -47,12 +55,19 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 	@Override
 	public List<Employee> getAllEmployeeDetails() {
 		
-		List<Employee> employees =  new ArrayList<>();		
-		employeeRepository.findByOrderByFirstNameAsc().forEach(employees::add);
+		try {
+			
+			List<Employee> employees =  new ArrayList<>();		
+			employeeRepository.findByOrderByFirstNameAsc().forEach(employees::add);
+
+			LOGGER.info("Fetching list of employees of size: {}", employees.size());
+			
+			return employees;
+		}
+		catch(Exception exception) {
+			throw new PortalServiceException(exception.getMessage(), exception.getCause());
+		}
 		
-		LOGGER.info("Fetching list of employees of size: {}", employees.size());
-		
-		return employees;
 	}
 	
 }

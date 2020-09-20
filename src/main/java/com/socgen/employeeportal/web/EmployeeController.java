@@ -8,7 +8,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,12 +41,14 @@ public class EmployeeController {
 	 * API end point to register new employee to the system
 	 * @param employee
 	 */
-	@PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public void registerEmployee(@RequestBody Employee employee){
+	@PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> registerEmployee(@RequestBody Employee employee){
 		
 		LOGGER.info("Inside registerEmployee method of EmployeeController");
 		
-		employeeService.registerEmployee(employee);
+		String empId = employeeService.registerEmployee(employee);
+		
+		return new ResponseEntity<>(empId, HttpStatus.OK);
 		
 	}
 	
@@ -52,11 +57,17 @@ public class EmployeeController {
 	 * @return List of employees
 	 */
 	@GetMapping(value="/employees")
-	public List<Employee> getEmployeeDetails(){	
+	public ResponseEntity<Object> getEmployeeDetails(){	
 		
 		LOGGER.info("Inside getEmployeeDetails method of EmployeeController");
 		
-		return employeeService.getAllEmployeeDetails();
+		List<Employee> employees = employeeService.getAllEmployeeDetails();
+		
+		if(CollectionUtils.isEmpty(employees)) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		
+		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 	
 }

@@ -6,9 +6,11 @@ package com.socgen.employeeportal.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,6 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
  * 
  */
 @Entity
+@Table(name = "EMPLOYEE")
 public class Employee implements Serializable{
 	
 	/**
@@ -29,20 +32,25 @@ public class Employee implements Serializable{
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String employeeId;
-
+	
 	/*First Name of the employee*/
+	@Column(name = "FIRST_NAME", length = 30, nullable = false)
 	private String firstName;
 	
 	/*Last Name of the employee*/
+	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	private String lastName;
 	
 	/*Gender of the employee*/
+	@Column(name = "GENDER", length = 10)
 	private String gender;
 	
 	/*Date of birth of the employee*/
+	@Column(name = "BIRTH_DATE")
 	private Date dateOfBirth;
 	
 	/*Department of the employee*/
+	@Column(name = "DEPARTMENT")
 	private String department;
 	
 	/*Default Employee Constructor*/
