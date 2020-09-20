@@ -6,6 +6,8 @@ package com.socgen.employeeportal.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import com.socgen.employeeportal.model.Employee;
 @Service
 public class EmployeePortalServiceImpl implements EmployeePortalService {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeePortalServiceImpl.class);
+	
 	@Autowired
 	private EmployeePortalRepository employeeRepository;
 	
@@ -30,6 +34,8 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 	public String registerEmployee(Employee employee) {
 		
 		Employee emp = employeeRepository.save(employee);
+		
+		LOGGER.info("Registered employee with employee id: {}", emp.getEmployeeId());
 		return emp.getEmployeeId();
 	}
 	
@@ -43,6 +49,8 @@ public class EmployeePortalServiceImpl implements EmployeePortalService {
 		
 		List<Employee> employees =  new ArrayList<>();		
 		employeeRepository.findByOrderByFirstNameAsc().forEach(employees::add);
+		
+		LOGGER.info("Fetching list of employees of size: {}", employees.size());
 		
 		return employees;
 	}
