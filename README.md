@@ -24,4 +24,6 @@ Please follow the below steps to work with the application
 
 9. For running the unit tests, select the particular class, and run as Junit test
 
+10. For creating the artifact for the project, run **mvn clean install** from the ide or from the unix machine
+
 
