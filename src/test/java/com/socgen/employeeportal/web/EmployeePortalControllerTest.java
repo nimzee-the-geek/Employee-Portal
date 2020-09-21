@@ -100,7 +100,7 @@ public class EmployeePortalControllerTest {
 		.andExpect(jsonPath("$[0].lastName", is(employee.getLastName())))
 		.andExpect(jsonPath("$[0].department", is(employee.getDepartment())))
 		.andExpect(jsonPath("$[0].gender", is(employee.getGender())))
-		//.andExpect(jsonPath("$[0].dateOfBirth", is(emp.getDateOfBirth())))
+		.andExpect(jsonPath("$[0].dateOfBirth", is(employee.getDateOfBirth().getTime())))
 		.andDo(print());
 		
 		verify(empService, times(1)).getAllEmployeeDetails();

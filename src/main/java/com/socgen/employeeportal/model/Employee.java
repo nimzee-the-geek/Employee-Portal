@@ -31,6 +31,7 @@ public class Employee implements Serializable{
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@Column(name="ID")
 	private String employeeId;
 	
 	/*First Name of the employee*/
@@ -50,7 +51,7 @@ public class Employee implements Serializable{
 	private Date dateOfBirth;
 	
 	/*Department of the employee*/
-	@Column(name = "DEPARTMENT")
+	@Column(name = "DEPARTMENT", length = 50)
 	private String department;
 	
 	/*Default Employee Constructor*/
