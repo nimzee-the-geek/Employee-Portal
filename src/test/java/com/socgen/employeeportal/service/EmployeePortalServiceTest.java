@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -42,7 +43,8 @@ public class EmployeePortalServiceTest {
 	}
 	
 	@Test
-	public void testGetAllUsersByFirstName_OrdAsc(){
+	@DisplayName("Getting all employees with first name in ascending order")
+	public void testGetAllEmployeesByFirstName_OrdAsc(){
 		when(empPortalRepository.findByOrderByFirstNameAsc()).thenReturn(Stream.of(
 				new Employee("UUID01","Berty","Rhodes","Female",Calendar.getInstance().getTime(),"Technology"),
 				new Employee("UUID02","Mark","Rhodes","Male",Calendar.getInstance().getTime(),"Technology"))
@@ -55,6 +57,7 @@ public class EmployeePortalServiceTest {
 	}
 	
 	@Test
+	@DisplayName("Saving new employee")
 	public void testRegisterEmployee_SaveInvoked(){
 		
 		final String expectedEmployeeId = "UUID01";

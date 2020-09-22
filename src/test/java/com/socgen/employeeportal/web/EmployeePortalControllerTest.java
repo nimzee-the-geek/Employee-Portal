@@ -22,6 +22,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -60,6 +61,7 @@ public class EmployeePortalControllerTest {
 	}
 	
 	@Test
+	@DisplayName("Registering New Employee")
 	public void testSaveValidEmployee_Return200OK() throws Exception{
 		
 		Employee employee = getEmployeeDetails();
@@ -80,6 +82,7 @@ public class EmployeePortalControllerTest {
 	}
 	
 	@Test
+	@DisplayName("Getting All Employees")
 	public void testGetAllEmployees_Return200OK() throws Exception{
 		
 		Employee employee = getEmployeeDetails();
@@ -108,6 +111,7 @@ public class EmployeePortalControllerTest {
 	}
 	
 	@Test
+	@DisplayName("Getting All Employees - Empty Result")
 	public void testGetAllEmployees_NoContent() throws Exception{
 		
 		when(empService.getAllEmployeeDetails()).thenReturn(Collections.emptyList());
